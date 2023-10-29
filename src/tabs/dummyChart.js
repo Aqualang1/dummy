@@ -1,10 +1,13 @@
 import React from "react";
 
-const DummyChart = () => (
-    <div>
-        <h2>Dummy Chart</h2>
-        <img src={`https://picsum.photos/200/300?d=${Date.now()}`} />
+const DummyChart = (props) => {    
+    
+    const {title} = props;
+    
+    return <div>
+        <h2>{title}</h2>
+        <img src={`https://picsum.photos/200/300?d=${Date.now()}`} alt="media"/>
     </div>
-);
+};
 
 export default DummyChart;

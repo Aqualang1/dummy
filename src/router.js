@@ -31,14 +31,14 @@ const AppRouter = () => {
 
     const router = createBrowserRouter([
         {
-            element: <Layout  tabs={tabs} />,
+            element: <Layout tabs={tabs} />,
             errorElement: <ErrorBoundary />,
             path: '/',
-            children: tabs.map(({id, path}) => ({
+            children: tabs.map(({ id, path, title }) => ({
                 path: id,
                 async lazy() {
                     const { default: Component } = await import(`./${path}`);
-                    return {Component};
+                    return { element: <Component title={title}/> };
                 },
             })),
         }
