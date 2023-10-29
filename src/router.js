@@ -42,7 +42,7 @@ const AppRouter = () => {
                 },
             })),
         }
-    ]);
+    ], { basename: '/dummy' });
 
     return <RouterProvider router={router} />
 }
