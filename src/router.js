@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import Layout from "./tabs/layout/Layout";
+import Loading from "./tabs/loading";
 
 function ErrorBoundary() {
     const error = useRouteError();
@@ -22,11 +23,15 @@ function ErrorBoundary() {
 
 const AppRouter = () => {
     const [tabs, setTabs] = useState([]);
+    // const [isLoading, setIsLoading] = useState(false);
+
 
     useEffect(() => {
+        // setIsLoading(true);
         fetch('https://64d8eebd5f9bf5b879ceb6cd.mockapi.io/tabs')
             .then(response => response.json())
             .then(data => setTabs(data.sort((a, b) => a.order - b.order)));
+        // setIsLoading(false);
     }, []);
 
     const router = createBrowserRouter([
@@ -34,11 +39,12 @@ const AppRouter = () => {
             element: <Layout tabs={tabs} />,
             errorElement: <ErrorBoundary />,
             path: '/',
+
             children: tabs.map(({ id, path, title }) => ({
                 path: id,
                 async lazy() {
                     const { default: Component } = await import(`./${path}`);
-                    return { element: <Component title={title}/> };
+                    return { element: <Component title={title} /> };
                 },
             })),
         }

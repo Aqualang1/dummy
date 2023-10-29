@@ -1,7 +1,7 @@
 import React from "react";
 
 const DummyChart = (props) => {    
-    
+
     const {title} = props;
     
     return <div>
